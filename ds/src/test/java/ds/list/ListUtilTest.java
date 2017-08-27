@@ -186,5 +186,6 @@ public class ListUtilTest {
 	public void testNumberList() {
 		LList list = ListUtil.numberList(11);
 		System.out.println(ListUtil.printList(list));
+		System.out.println("testing");
 	}
 }
