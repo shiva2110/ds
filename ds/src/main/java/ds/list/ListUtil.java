@@ -122,5 +122,24 @@ public class ListUtil {
 		}
 		return sb.toString();
 	}
+	
+	public static <T> void reverse(LList<T> list) {
+	    if (list == null) {
+	        return;
+	    }
+	    Node<T> head = list.head;
+	    list.head = reverseNode(head, head.next);
+	    head.next = null;
+	}
+	
+	private static <T> Node<T> reverseNode(Node<T> current, Node<T> next) {
+	    if (next == null) {
+	        return current;
+	    }
+	    
+	    Node<T> nextNext = next.next;
+	    next.next = current;
+	    return reverseNode(next, nextNext);
+	}
 
 }

@@ -188,4 +188,44 @@ public class ListUtilTest {
 		System.out.println(ListUtil.printList(list));
 		System.out.println("testing");
 	}
+	
+	@Test
+	public void testReverseList() {
+	    System.out.println("test reverse list");
+	    LList<String> list = new LList<>();
+	    list.insert("a").insert("b");
+	    System.out.println(ListUtil.printList(list));
+	    ListUtil.reverse(list);
+	    System.out.println(ListUtil.printList(list));
+	}
+	
+	@Test
+    public void testReverseList1() {
+        System.out.println("test reverse list");
+        LList<String> list = new LList<>();
+        list.insert("a");
+        System.out.println(ListUtil.printList(list));
+        ListUtil.reverse(list);
+        System.out.println(ListUtil.printList(list));
+    }
+	
+	@Test
+    public void testReverseList2() {
+        System.out.println("test reverse list");
+        LList<String> list = new LList<>();
+        list.insert("a").insert("b").insert("c");
+        System.out.println(ListUtil.printList(list));
+        ListUtil.reverse(list);
+        System.out.println(ListUtil.printList(list));
+    }
+	
+	@Test
+    public void testReverseList3() {
+        System.out.println("test reverse list");
+        LList<String> list = new LList<>();
+        list.insert("a").insert("b").insert("c").insert("d");
+        System.out.println(ListUtil.printList(list));
+        ListUtil.reverse(list);
+        System.out.println(ListUtil.printList(list));
+    }
 }
