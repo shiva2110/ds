@@ -2,10 +2,30 @@ package ds.list;
 
 public class LList<T> {
 	Node<T> head;
+	Node<T> tail;
 	
 	public LList<T> insert(T data) {
-		head = new Node<T>(data, head);
+	    if (head == null) {
+	        initiateHead(data);
+	    } else {
+	        head = new Node<T>(data, head);
+	    }		
 		return this;
+	}
+	
+	private void initiateHead(T data) {
+	    head = new Node<T>(data, null);
+        tail = head;
+	}
+	
+	public LList<T> insertT(T data) {
+	    if (head == null) {
+	        initiateHead(data);
+	    } else {
+	        tail.next = new Node<>(data, null);
+	        tail = tail.next;
+	    }
+	    return this;
 	}
 	
 	@Override

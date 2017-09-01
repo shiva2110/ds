@@ -228,4 +228,31 @@ public class ListUtilTest {
         ListUtil.reverse(list);
         System.out.println(ListUtil.printList(list));
     }
+	
+	@Test
+	public void testInsertAt() {
+	    System.out.println("testInsertAt");
+	    LList<String> list = new LList<>();
+	    list.insertT("a").insertT("b").insertT("c");
+	    ListUtil.insertAt(list, 0, "z");
+	    System.out.println(ListUtil.printList(list));
+	    
+	    list = new LList<>();
+        list.insertT("a").insertT("c").insertT("d");
+	    ListUtil.insertAt(list, 1, "b");
+        System.out.println(ListUtil.printList(list));
+        
+        list = new LList<>();
+        list.insertT("a").insertT("b").insertT("c");
+        ListUtil.insertAt(list, 3, "d");
+        System.out.println(ListUtil.printList(list));
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+    public void testInsertAt1() {        
+        LList<String> list = new LList<>();
+        list.insertT("a").insertT("b").insertT("c");
+        ListUtil.insertAt(list, 4, "d");
+        System.out.println(ListUtil.printList(list));
+    }
 }

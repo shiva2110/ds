@@ -141,5 +141,48 @@ public class ListUtil {
 	    next.next = current;
 	    return reverseNode(next, nextNext);
 	}
-
+	
+	public static <T> void insertAt(LList<T> list, int index, T data) {
+	   if (index < 0) {
+	       throw new IllegalArgumentException();
+	   }
+	   
+	   if (index == 0) {
+	       list.head = new Node<T>(data, list.head);
+	       return;
+	   }
+	   
+	   Node<T> node = list.head;
+	   int i = 0;
+	   while(node != null) {
+	       if (i == (index-1)) {
+	           node.next = new Node<>(data, node.next);
+	           return;
+	       }
+	       node = node.next;
+	       i++;
+	   }
+	   throw new IllegalArgumentException("index is out of bound!");
+	}
+	
+	public static void sortedInsert(LList<Integer> list, int newData) {
+	    if (list == null) {
+	        throw new IllegalArgumentException();
+	    }
+	    
+	    if (list.head == null || list.head.data >= newData) {
+	       list.head = new Node<>(newData, list.head);
+	       return;
+	    }
+	    
+	    Node<Integer> node = list.head;
+	    while(node.next != null) {
+	        if (node.next.data >= newData) {
+	            node.next = new Node<>(newData, node.next);
+	            return;
+	        }
+	        node = node.next;
+	    }
+	    list.insertT(newData);
+	}
 }
