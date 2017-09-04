@@ -4,6 +4,29 @@ public class LList<T> {
 	Node<T> head;
 	Node<T> tail;
 	
+	public LList() {
+		
+	}
+	
+	public LList(T... datas) {
+		if (datas == null) {
+			return;
+		}
+		
+		for( T data : datas) {
+			insertT(data);
+		}
+	}
+	
+	public LList<T> insertNode(Node<T> node) {
+		if (node == null) {
+			throw new IllegalArgumentException("node cannot be null!");
+		}
+		node.next = this.head;
+		this.head = node;
+		return this;
+	}
+	
 	public LList<T> insert(T data) {
 	    if (head == null) {
 	        initiateHead(data);

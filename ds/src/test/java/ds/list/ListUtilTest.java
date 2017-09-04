@@ -1,5 +1,7 @@
 package ds.list;
 
+import java.util.Map;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -255,4 +257,357 @@ public class ListUtilTest {
         ListUtil.insertAt(list, 4, "d");
         System.out.println(ListUtil.printList(list));
     }
+	
+	@Test
+	public void testSortedInsert() {
+		System.out.println("test sorted insert!");
+		LList<Integer> list = new LList<>();
+		list.insertT(4).insertT(5).insertT(6);
+		ListUtil.sortedInsert(list, 3);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<>();
+		list.insertT(4).insertT(6).insertT(7);
+		ListUtil.sortedInsert(list, 5);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<>();
+		list.insertT(4).insertT(5).insertT(7);
+		ListUtil.sortedInsert(list, 6);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<>();
+		list.insertT(4).insertT(5).insertT(7);
+		ListUtil.sortedInsert(list, 8);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<>();
+		ListUtil.sortedInsert(list, 8);
+		System.out.println(ListUtil.printList(list));
+		
+	}
+	
+	@Test
+	public void testInsertSort() {
+		System.out.println("testInsertSort");
+		LList<Integer> list = new LList<>();
+		list.insertT(5).insertT(4).insertT(3).insertT(2);
+		LList<Integer> sortedList = ListUtil.insertSort(list);
+		System.out.println(ListUtil.printList(sortedList));
+		
+		list = new LList<>();
+		list.insertT(2).insertT(4).insertT(5).insertT(7);
+		sortedList = ListUtil.insertSort(list);
+		System.out.println(ListUtil.printList(sortedList));
+		
+		list = new LList<>();
+		list.insertT(2);
+		sortedList = ListUtil.insertSort(list);
+		System.out.println(ListUtil.printList(sortedList));
+		
+		list = new LList<>();
+		list.insertT(2).insertT(1);
+		sortedList = ListUtil.insertSort(list);
+		System.out.println(ListUtil.printList(sortedList));
+	}
+	
+	@Test
+	public void testAppend() {
+		System.out.println("test append");
+		LList<Integer> list1 = new LList<Integer>(1,2,3);
+		LList<Integer> list2 = new LList<Integer>(4,5);
+		LList<Integer> list3 = ListUtil.append(list1, list2);
+		System.out.println(ListUtil.printList(list3));
+		
+		list1 = new LList<Integer>();
+		list2 = new LList<Integer>(4,5);
+		list3 = ListUtil.append(list1, list2);
+		System.out.println(ListUtil.printList(list3));
+		
+		list1 = new LList<Integer>(1,2,3);
+		list2 = new LList<Integer>();
+		list3 = ListUtil.append(list1, list2);
+		System.out.println(ListUtil.printList(list3));
+		
+		list1 = new LList<Integer>(1);
+		list2 = new LList<Integer>(2);
+		list3 = ListUtil.append(list1, list2);
+		System.out.println(ListUtil.printList(list3));
+		
+		list1 = new LList<Integer>();
+		list2 = new LList<Integer>();
+		list3 = ListUtil.append(list1, list2);
+		System.out.println(ListUtil.printList(list3));
+	}
+	
+	@Test
+	public void testFBSplit() {
+		System.out.println("test FB split");
+		LList<Integer> list = new LList<Integer>(1);
+		Map<String, LList<Integer>> map = ListUtil.frontBackSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2);
+		map = ListUtil.frontBackSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2,3);
+		map = ListUtil.frontBackSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2,3,4);
+		map = ListUtil.frontBackSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2,3,4,5);
+		map = ListUtil.frontBackSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>();
+		map = ListUtil.frontBackSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+	}
+	
+	@Test
+	public void testSortedDupRemove() {
+		System.out.println("testSortedDupRemove");
+		LList<Integer> list = new LList<Integer>(1);
+		ListUtil.sortedDupRemove(list);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<Integer>(1,1);
+		ListUtil.sortedDupRemove(list);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<Integer>(1,1,2,2);
+		ListUtil.sortedDupRemove(list);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<Integer>(1,1,2);
+		ListUtil.sortedDupRemove(list);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<Integer>(1,1,2,2,3);
+		ListUtil.sortedDupRemove(list);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<Integer>(1,1,2,2,3,4,5,5);
+		ListUtil.sortedDupRemove(list);
+		System.out.println(ListUtil.printList(list));
+	}
+	
+	@Test
+	public void testAlternatingSplit() {
+		System.out.println("test alternating split");
+		LList<Integer> list = new LList<Integer>(1,2,3);
+		Map<String, LList<Integer>> map = ListUtil.alternatingSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2);
+		map = ListUtil.alternatingSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2,3,4);
+		map = ListUtil.alternatingSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2,3,4,5);
+		map = ListUtil.alternatingSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1,2,3,4,5,6);
+		map = ListUtil.alternatingSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+		
+		list = new LList<Integer>(1);
+		map = ListUtil.alternatingSplit(list);
+		System.out.println("front: " + ListUtil.printList(map.get("front")));
+		System.out.println("back: " + ListUtil.printList(map.get("back")));
+	}
+	
+	@Test
+	public void testShuffleMerge() {
+		System.out.println("test shuffle merge");
+		LList<String> list1 = new LList<>("a", "b", "c");
+		LList<String> list2 = new LList<>("d", "e", "f");
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>("a", "b", "c");
+		list2 = new LList<>("d", "e");
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>("a", "b");
+		list2 = new LList<>("d", "e", "f");
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>("a");
+		list2 = new LList<>("d", "e", "f");
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>("a", "b", "c");
+		list2 = new LList<>("d");
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>("a", "b", "c");
+		list2 = new LList<>();
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>();
+		list2 = new LList<>("d", "e", "f");
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>();
+		list2 = new LList<>();
+		ListUtil.shuffleMerge(list1, list2);
+		System.out.println(ListUtil.printList(list1));
+	}
+	
+	@Test
+	public void testSortedMerge() {
+		System.out.println("test sorted merge");
+		LList<Integer> list1 = new LList<>(1, 3, 5);
+		LList<Integer> list2 = new LList<>(2, 4, 6);
+		LList<Integer> result = ListUtil.sortedMerge(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(1, 3, 5);
+		list2 = new LList<>(2);
+		result = ListUtil.sortedMerge(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(3, 3, 5);
+		list2 = new LList<>(2);
+		result = ListUtil.sortedMerge(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(3);
+		list2 = new LList<>(2, 5, 6);
+		result = ListUtil.sortedMerge(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(3);
+		list2 = new LList<>(2);
+		result = ListUtil.sortedMerge(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(3);
+		list2 = new LList<>();
+		result = ListUtil.sortedMerge(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+	}
+	
+	@Test
+	public void testMergeSort() {
+		System.out.println("test merge sort");
+		LList<Integer> list = new LList<>(5,3,7);
+		LList<Integer> sorted = ListUtil.mergeSort(list);
+		System.out.println(ListUtil.printList(sorted));
+		
+		list = new LList<>(5);
+		sorted = ListUtil.mergeSort(list);
+		System.out.println(ListUtil.printList(sorted));
+		
+		list = new LList<>(5,4,3,2,1);
+		sorted = ListUtil.mergeSort(list);
+		System.out.println(ListUtil.printList(sorted));
+	}
+	
+	@Test
+	public void testIntersect() {
+		System.out.println("test intersect");
+		LList<Integer> list1 = new LList<>(3,3,7);
+		LList<Integer> list2 = new LList<>(3,3,7);
+		LList<Integer> result = ListUtil.sortedIntersect(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(3,3,7);
+		list2 = new LList<>(2,3,7, 7, 8);
+		result = ListUtil.sortedIntersect(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(3,3,7, 7);
+		list2 = new LList<>(2,3,4, 7, 7, 8);
+		result = ListUtil.sortedIntersect(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(2,4,6,8,10);
+		list2 = new LList<>(10);
+		result = ListUtil.sortedIntersect(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+		list1 = new LList<>(2,4,6,8,10,11,13,14,15);
+		list2 = new LList<>(10,11,12,15);
+		result = ListUtil.sortedIntersect(list1, list2);
+		System.out.println(ListUtil.printList(result));
+		
+	}
+	
+	@Test
+	public void testReverseItr() {
+		System.out.println("reverse itr");
+		LList<Integer> list1 = new LList<>(3);
+		ListUtil.reverseItr(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4);
+		ListUtil.reverseItr(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4,5);
+		ListUtil.reverseItr(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4,5,6);
+		ListUtil.reverseItr(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4,5,6,7);
+		ListUtil.reverseItr(list1);
+		System.out.println(ListUtil.printList(list1));
+
+	}
+	
+	@Test
+	public void testReverseRec() {
+		System.out.println("reverse recursive");
+		LList<Integer> list1 = new LList<>(3);
+		ListUtil.reverse(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4);
+		ListUtil.reverse(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4,5);
+		ListUtil.reverse(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4,5,6);
+		ListUtil.reverse(list1);
+		System.out.println(ListUtil.printList(list1));
+		
+		list1 = new LList<>(3,4,5,6,7);
+		ListUtil.reverse(list1);
+		System.out.println(ListUtil.printList(list1));
+	}
+	
 }
