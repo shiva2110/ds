@@ -610,4 +610,19 @@ public class ListUtilTest {
 		System.out.println(ListUtil.printList(list1));
 	}
 	
+	@Test
+	public void testDup() {
+		System.out.println("test dup");
+		LList<Integer> list = new LList<>(1,1,2);
+		ListUtil.deleteDuplicates(list.head);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<>(1,1,2,3,3);
+		ListUtil.deleteDuplicates(list.head);
+		System.out.println(ListUtil.printList(list));
+		
+		list = new LList<>(1,1,2,2,2,3,3,3,3);
+		ListUtil.deleteDuplicates(list.head);
+		System.out.println(ListUtil.printList(list));
+	}
 }

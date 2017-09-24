@@ -34,5 +34,10 @@ public class ArraysTest {
 		Assert.assertEquals("ab", Arrays.removeDup("abab"));
 		Assert.assertEquals("abcdg", Arrays.removeDup("abcdadbcg"));
 	}
+	
+	@Test
+	public void testMod() {
+		System.out.println(366 % 7);
+	}
 
 }

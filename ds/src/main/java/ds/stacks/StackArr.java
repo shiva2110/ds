@@ -17,7 +17,10 @@ public class StackArr {
 	int[] topIndex = new int[] {-1, -1, -1};
 	
 	public StackArr(int size) {
-		dataArr = new StackArrNode[size];		
+		dataArr = new StackArrNode[size];
+		for (int i=0; i<size; i++) {
+			freeList.push(i);
+		}
 	}
 	
 	public void push(String data, int stackNum) {
