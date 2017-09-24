@@ -1,10 +1,17 @@
 package heaps;
 
 public class Heap {
-	
+
 	Integer[] arr;
 	int elementsCount ;
-	
+
+	public void print() {
+		for (int i=0; i<elementsCount; i++) {
+			System.out.print(arr[i] + ",");
+		}
+		System.out.println();
+	}
+
 	public Heap(int[] arr) {
 		this.arr = new Integer[arr.length];
 		for (int i=0; i<arr.length; i++) {
@@ -13,13 +20,45 @@ public class Heap {
 		elementsCount = arr.length;
 		heapify();		
 	}
-	
-	public int extractMin() {
+
+	public static int findSum(int[] floats) {
+		Heap heap = new Heap(floats);
+
+		int sum = 0;
+		while(heap.elementsCount > 0) {
+			Integer min1 = heap.extractMin();
+			Integer min2 = heap.extractMin();
+
+			if (min2 == null) {
+				sum = min1;
+				break;
+			}
+			sum = min1 + min2;
+			heap.insert(sum);
+		}
+		return sum;
+	}
+
+	public void insert(int num) {
+		if (elementsCount == arr.length) {
+			throw new IllegalArgumentException("no space left");
+		}
+
+		arr[elementsCount] = num;
+		elementsCount++;
+		heapify();
+	}
+
+	public Integer extractMin() {
+		if (elementsCount == 0) {
+			return null;
+		}
+
 		int min = arr[0];
 		arr[0] = arr[elementsCount - 1];
 		arr[elementsCount - 1] = null;
 		elementsCount --;
-		
+
 		siftDown(0);
 		return min;		
 	}
@@ -65,7 +104,11 @@ public class Heap {
 	}
 
 	public int parent(int i) {
-		double d = Math.ceil((i/2) - 1);
+		if (i==1) {
+			return 0;
+		}
+
+		double d = Math.ceil(((double)i/2) - 1);  
 		return (int) d;  
 	}
 
